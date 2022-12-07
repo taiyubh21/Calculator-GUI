@@ -8,13 +8,24 @@ from tkinter import *
 def value_return(number):
     # insert value into text box
     # allows value not to be overwritten so can write big number using multiple number buttons
+    # adds numbers to the end
     display.insert(END, number)
+
+
+# separate function created to add decimal to create float
+def decimal_insert(decimal):
+    # adds decimal to numbers in the textbox display making it a float
+    display.insert(END, decimal)
+    # disable button after pressed so no more than one decimal is added
+    button_decimal.configure(state=DISABLED)
 
 
 # function created to clear textbox using A/C button
 def clear_value():
     # deletes whatever is in the textbox
     display.delete(0, END)
+    # return decimal button back to its normal state so can be pressed again and doesn't remain disabled
+    button_decimal.configure(state=NORMAL)
 
 
 if __name__ == "__main__":
@@ -45,7 +56,9 @@ if __name__ == "__main__":
     button8 = Button(window, text="8", padx=33, pady=22, font=("Arial", 15), command=lambda: value_return(8))
     button9 = Button(window, text="9", padx=33, pady=22, font=("Arial", 15), command=lambda: value_return(9))
 
-    button_decimal = Button(window, text=".", padx=35, pady=22, font=("Arial", 15))
+    # using decimal_insert function and passing '.' through
+    button_decimal = Button(window, text=".", padx=35, pady=22, font=("Arial", 15), command=lambda: decimal_insert('.'))
+
     # button_clear calls clear_value function
     button_clear = Button(window, text="A/C", padx=68, pady=22, font=("Arial", 15), command=clear_value)
     button_equals = Button(window, text="=", padx=79, pady=22, font=("Arial", 15))
