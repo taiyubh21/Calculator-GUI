@@ -4,6 +4,12 @@
 from tkinter import *
 
 
+# defining what the operator is with the use of global variable so can be used in equals function
+global operator
+# use of global variable to be used in equals function
+global first_num
+
+
 # function created for return value of number to textbox
 def value_return(number):
     # insert value into text box
@@ -30,9 +36,63 @@ def clear_value():
 
 # function created for addition operator
 def addition():
+    # using global variable operator in function
+    global operator
+    operator = "Addition"
     # save the first number entered as a float
     first_number = float(display.get())
-    # use of global variable to be used in equals function
+    # using global variable first_num in function
+    global first_num
+    # save the number into the global variable
+    first_num = first_number
+    # deletes whatever is in the textbox so user can enter second number
+    display.delete(0, END)
+    # return decimal button back to its normal state so can be pressed again and doesn't remain disabled
+    button_decimal.configure(state=NORMAL)
+
+
+# function created for subtraction operator
+def subtraction():
+    # using global variable operator in function
+    global operator
+    operator = "Subtraction"
+    # save the first number entered as a float
+    first_number = float(display.get())
+    # using global variable first_num in function
+    global first_num
+    # save the number into the global variable
+    first_num = first_number
+    # deletes whatever is in the textbox so user can enter second number
+    display.delete(0, END)
+    # return decimal button back to its normal state so can be pressed again and doesn't remain disabled
+    button_decimal.configure(state=NORMAL)
+
+
+# function created for multiplication operator
+def multiplication():
+    # using global variable operator in function
+    global operator
+    operator = "Multiplication"
+    # save the first number entered as a float
+    first_number = float(display.get())
+    # using global variable first_num in function
+    global first_num
+    # save the number into the global variable
+    first_num = first_number
+    # deletes whatever is in the textbox so user can enter second number
+    display.delete(0, END)
+    # return decimal button back to its normal state so can be pressed again and doesn't remain disabled
+    button_decimal.configure(state=NORMAL)
+
+
+# function created for division operator
+def division():
+    # using global variable operator in function
+    global operator
+    operator = "Division"
+    # save the first number entered as a float
+    first_number = float(display.get())
+    # using global variable first_num in function
     global first_num
     # save the number into the global variable
     first_num = first_number
@@ -48,9 +108,23 @@ def equals():
     second_num = float(display.get())
     # deletes whatever is in the textbox so result can be output
     display.delete(0, END)
-    # do addition operation on the numbers and insert into textbox
-    result = first_num + second_num
-    display.insert(0, str(result))
+    # whatever the global variable is equal to once the operator button has been pressed then do that operation
+    if operator == "Addition":
+        # do addition operation on the numbers and insert into textbox
+        result = first_num + second_num
+        display.insert(0, str(result))
+    elif operator == "Subtraction":
+        # do subtraction operation on the numbers and insert into textbox
+        result = first_num - second_num
+        display.insert(0, str(result))
+    elif operator == "Multiplication":
+        # do multiplication operation on the numbers and insert into textbox
+        result = first_num * second_num
+        display.insert(0, str(result))
+    elif operator == "Division":
+        # do division operation on the numbers and insert into textbox
+        result = first_num / second_num
+        display.insert(0, str(result))
 
 
 if __name__ == "__main__":
@@ -86,14 +160,17 @@ if __name__ == "__main__":
 
     # button_clear calls clear_value function
     button_clear = Button(window, text="A/C", padx=68, pady=22, font=("Arial", 15), command=clear_value)
-    # button_clear calls equals function
+    # button_equals calls equals function
     button_equals = Button(window, text="=", padx=79, pady=22, font=("Arial", 15), command=equals)
 
-    # button_clear calls addition function
+    # button_add calls addition function
     button_add = Button(window, text="+", padx=32, pady=22, font=("Arial", 15), command=addition)
-    button_sub = Button(window, text="-", padx=34, pady=22, font=("Arial", 15))
-    button_mul = Button(window, text="x", padx=33, pady=22, font=("Arial", 15))
-    button_div = Button(window, text="÷", padx=32, pady=22, font=("Arial", 15))
+    # button_sub calls subtraction function
+    button_sub = Button(window, text="-", padx=34, pady=22, font=("Arial", 15), command=subtraction)
+    # button_mul calls multiplication function
+    button_mul = Button(window, text="x", padx=33, pady=22, font=("Arial", 15), command=multiplication)
+    # button_div calls division function
+    button_div = Button(window, text="÷", padx=32, pady=22, font=("Arial", 15), command=division)
 
     # displaying buttons appropriately
     button_clear.grid(row=1, column=0, columnspan=2)
